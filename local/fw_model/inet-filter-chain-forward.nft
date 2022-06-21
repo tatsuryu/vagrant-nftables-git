@@ -1,0 +1,6 @@
+# An example forward chain
+chain forward {
+	type filter hook forward priority filter + 10; policy drop
+	meta mark 0x00010ca1 counter accept
+	meta mark 0x0d0cca5e counter jump dockercase
+}

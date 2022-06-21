@@ -1,0 +1,8 @@
+chain dockercase {
+    counter accept
+}
+
+chain ssh {
+    ct state new limit rate over 3/minute add @blackhole { ip saddr timeout 4h } drop
+    accept
+}

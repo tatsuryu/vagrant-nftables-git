@@ -1,0 +1,30 @@
+set blackhole {
+	type ipv4_addr
+	size 65534
+	flags timeout
+	comment "DROP all from these hosts"
+}
+
+set service_clients {
+	type ipv4_addr
+	flags interval
+	comment "Allowed to access local services"
+}
+
+set local_services {
+	type inet_proto . inet_service
+	comment "Protocol and ports for local services"
+}
+
+set rfc1918 {
+	type ipv4_addr
+	flags constant,interval
+	comment "RFC1918 Networks"
+	elements = { 10.0.0.0/8, 172.16.0.0/12,
+				192.168.0.0/16 }
+}
+
+set public_services {
+	type inet_proto . inet_service
+	comment "Protocol and ports for public services"
+}

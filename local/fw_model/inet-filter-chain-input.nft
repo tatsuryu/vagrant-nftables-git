@@ -1,0 +1,15 @@
+# An example input chain
+chain input {
+	type filter hook input priority 0; policy drop;
+	ct state established,related counter accept
+	ct state invalid counter drop
+	iif "lo" accept
+	ip protocol icmp accept
+	ip6 nexthdr ipv6-icmp accept comment "accept all icmp types"
+	ip saddr @blackhole drop
+	ip saddr @rfc1918 accept
+	ct state new tcp dport ssh jump ssh
+	ip protocol . th dport @public_services accept
+	ip saddr @service_clients ip protocol . th dport @local_services accept
+	ip protocol tcp reject with tcp reset
+}
