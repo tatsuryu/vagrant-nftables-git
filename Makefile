@@ -1,14 +1,18 @@
 .DEFAULT_GOAL := start
 
+.PHONY: vagrant unvagrant fw unfw
+
 vagrant:
 	vagrant up
 
 unvagrant:
 	vagrant destroy -f
 
-fw:
+local/gitfw:
 	vagrant push
 
+fw: local/gitfw
+	
 unfw:
 	rm -rf local/gitfw
 
